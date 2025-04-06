@@ -2,13 +2,9 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const DestructionEffects = ({ level }) => {
-  // Particles that increase with destruction level
   const particleCount = Math.floor(level * 2);
   
-  useFrame((state, delta) => {
-    // Visual glitches increase with destruction level
-    // This would be implemented with shaders and post-processing
-  });
+  useFrame((state, delta) => {});
 
   return (
     <>

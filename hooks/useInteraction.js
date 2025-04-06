@@ -29,13 +29,11 @@ const useInteraction = (containerRef) => {
       
       setInteractionEvents(prev => [...prev, newEvent]);
     };
-    
-    // Add event listeners
+
     element.addEventListener('click', handleClick);
     element.addEventListener('keydown', handleKeyPress);
     
     return () => {
-      // Clean up
       element.removeEventListener('click', handleClick);
       element.removeEventListener('keydown', handleKeyPress);
     };

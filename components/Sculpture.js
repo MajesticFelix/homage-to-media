@@ -12,24 +12,16 @@ import styles from '../styles/Sculpture.module.css';
 const Sculpture = () => {
   const containerRef = useRef(null);
   const [destructionLevel, setDestructionLevel] = useState(0);
-  
-  // Custom hooks
-  const { decayPercentage, timeRemaining } = useDecay(27 * 60); // 27 minutes in seconds
+
+  const { decayPercentage, timeRemaining } = useDecay(27 * 60);
   const { interactionEvents } = useInteraction(containerRef);
-  
-  // Update destruction level based on decay and interactions
+
   useEffect(() => {
     const baseDestruction = decayPercentage;
-    const interactionBoost = interactionEvents.length * 0.5; // Each interaction adds to destruction
+    const interactionBoost = interactionEvents.length * 0.5; 
     const newLevel = Math.min(baseDestruction + interactionBoost, 100);
     setDestructionLevel(newLevel);
-    
-    // Play stress sounds as destruction increases
-    if (destructionLevel > 50 && soundManager) {
-      soundManager.startStressSound((destructionLevel - 50) / 50);
-    }
-    
-    // Final explosion when completely destroyed
+
     if (destructionLevel >= 99 && soundManager) {
       soundManager.playExplosion();
     }

@@ -7,8 +7,7 @@ const SculptureModel = ({ destructionLevel }) => {
   const numberOfGears = 20;
   const numberOfLevers = 10;
   const groupRef = useRef();
-  
-  // Generate gear data with different properties
+
   const gears = useMemo(() => {
     return Array.from({ length: numberOfGears }, (_, i) => ({
       id: `gear-${i}`,
@@ -20,11 +19,10 @@ const SculptureModel = ({ destructionLevel }) => {
       rotation: Math.random() * Math.PI * 2,
       size: 0.3 + Math.random() * 0.7,
       teeth: 5 + Math.floor(Math.random() * 15),
-      breakingPoint: 20 + Math.random() * 80 // When this gear breaks
+      breakingPoint: 20 + Math.random() * 80 
     }));
   }, []);
-  
-  // Generate lever data
+
   const levers = useMemo(() => {
     return Array.from({ length: numberOfLevers }, (_, i) => ({
       id: `lever-${i}`,
@@ -38,14 +36,11 @@ const SculptureModel = ({ destructionLevel }) => {
       breakingPoint: 30 + Math.random() * 70
     }));
   }, []);
-  
-  // Animation and destruction logic
+
   useFrame((state, delta) => {
     if (groupRef.current) {
-      // Apply general decay effect to the whole sculpture
       groupRef.current.rotation.y += delta * 0.1;
-      
-      // As destruction increases, the sculpture becomes more chaotic
+
       if (destructionLevel > 50) {
         groupRef.current.rotation.x += delta * (destructionLevel - 50) * 0.01;
         groupRef.current.position.y -= delta * (destructionLevel - 50) * 0.005;
